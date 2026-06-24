@@ -1,6 +1,0 @@
-@demoWithDotnet10AndEfCore_HostAddress = http://localhost:5276
-
-GET {{demoWithDotnet10AndEfCore_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
