@@ -3,30 +3,36 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using demoWithDotnet10AndEfCore.Models;
+using demoWithDotnet10AndEfCore.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace demoWithDotnet10AndEfCore.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class VideoGameCharactersController : ControllerBase
+    public class VideoGameCharactersController(IVideoGameCharacterService videoGameCharacterService) : ControllerBase
     {
 
-        static List<Character> characters = new List<Character>
-        {
-            new Character { Id = 1, Name = "Mario", Game = "Super Mario Bros.", Role = "Protagonist" },
-            new Character { Id = 2, Name = "Link", Game = "The Legend of Zelda", Role = "Protagonist" },
-            new Character { Id = 3, Name = "Master Chief", Game = "Halo", Role = "Protagonist" },
-            new Character { Id = 4, Name = "Lara Croft", Game = "Tomb Raider", Role = "Protagonist" },
-            new Character { Id = 5, Name = "Kratos", Game = "God of War", Role = "Protagonist" }
-        };
+
 
         [HttpGet]
         public async Task<ActionResult<List<Character>>> GetCharacters()
         {
-            return Ok(characters);
+            return Ok(await videoGameCharacterService.GetCharactersAsync());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Character?>> GetCharacterById(int id)
+        {
+            var character = await videoGameCharacterService.GetCharacterByIdAsync(id);
+
+            if (character is null)
+            {
+                return NotFound();
+            }
+
+            return Ok(character);
+        }
 
     }
 }
