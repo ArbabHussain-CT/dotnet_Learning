@@ -35,5 +35,45 @@ namespace demoWithDotnet10AndEfCore.Controllers
             return Ok(character);
         }
 
+        [HttpPost]
+        public async Task<ActionResult<CharacterResponse>> AddCharacter(CreateCharacterRequest request)
+        {
+
+
+            var createdCharacter = await videoGameCharacterService.AddCharacterAsync(request);
+
+
+
+            return CreatedAtAction(nameof(GetCharacterById), new { id = createdCharacter.Id }, createdCharacter);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateCharacter(int id, UpdateCharacterRequest request)
+        {
+
+
+            var updatedCharacter = await videoGameCharacterService.UpdateCharacterAsync(id, request);
+
+            if (!updatedCharacter)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCharacter(int id)
+        {
+            var deletedCharacter = await videoGameCharacterService.DeleteCharacterAsync(id);
+
+            if (!deletedCharacter)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
     }
 }

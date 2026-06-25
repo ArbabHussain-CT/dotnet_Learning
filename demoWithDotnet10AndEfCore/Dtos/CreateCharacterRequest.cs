@@ -1,8 +1,7 @@
 namespace demoWithDotnet10AndEfCore.Dtos;
 
-public class CharacterResponse
+public class CreateCharacterRequest
 {
-    public int Id { get; set; }
     public string Name { get; set; } = String.Empty;
 
     public string Game { get; set; } = String.Empty;
