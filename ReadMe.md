@@ -474,3 +474,9 @@ This configuration is commonly used on developer machines running:
 * Node.js
 * databases
 * IDE tooling
+
+ref for mssql extension in vs code
+
+```
+<https://www.youtube.com/playlist?list=PL3EZ3A8mHh0xv6HXxjln5U6JwqSDrh2wG>
+```
